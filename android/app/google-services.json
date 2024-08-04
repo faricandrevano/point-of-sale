@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "130435299738",
+    "project_id": "pointofsale-fa2ce",
+    "storage_bucket": "pointofsale-fa2ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130435299738:android:dd233390fa8e163d666223",
+        "android_client_info": {
+          "package_name": "com.codepute.pointofsales"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130435299738-6ooqs7oh1cpa78o6ote6tko09d3jrrl5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codepute.pointofsales",
+            "certificate_hash": "3e0aaa1c6519ca3ec757b6e2db8aacd7e30b0d48"
+          }
+        },
+        {
+          "client_id": "130435299738-ufnjigmsc8ig1vpdrq4mknj05mcg67l1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDskGXdo-7ferdf1qCCDYymdFGw09Gg_bQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130435299738-ufnjigmsc8ig1vpdrq4mknj05mcg67l1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

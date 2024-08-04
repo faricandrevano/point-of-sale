@@ -1,4 +1,4 @@
-package com.example.pos
+package com.codepute.pointofsales
 
 import io.flutter.embedding.android.FlutterActivity
 
