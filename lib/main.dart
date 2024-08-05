@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:pos/firebase_options.dart';
 import 'package:pos/presentation/screens/home_screen.dart';
+import 'package:pos/presentation/screens/sign_in_screen.dart';
+import 'package:pos/presentation/screens/sign_up_screen.dart';
 
 void main(List<String> args) async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -19,10 +21,11 @@ class MyApp extends StatelessWidget {
     FlutterNativeSplash.remove();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
-      initialRoute: '/',
+      initialRoute: '/sign-up',
       routes: {
         '/': (_) => const HomeScreen(),
+        '/sign-up': (_) => const SignUpScreen(),
+        '/sign-in': (_) => const SignInScreen(),
       },
     );
   }
