@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
@@ -146,7 +147,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, '/sign-in'),
+                      onTap: () => context.goNamed('/sign-in'),
                       child: Text(
                         'Sign in',
                         style: bodyL.copyWith(
