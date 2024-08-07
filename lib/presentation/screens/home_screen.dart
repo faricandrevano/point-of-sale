@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_bar_chart.dart';
 import 'package:pos/presentation/widgets/custom_menu_dashboard.dart';
+import 'package:pos/router/named_route.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -58,9 +60,12 @@ class HomeScreen extends StatelessWidget {
                     img: 'assets/icons/icon_customers.png',
                     title: 'Csutomer',
                   ),
-                  const CustomMenuDashboard(
+                  CustomMenuDashboard(
                     img: 'assets/icons/icon_settings.png',
                     title: 'Setting',
+                    onTap: () {
+                      context.push(NamedRoute.routeSettings);
+                    },
                   ),
                 ],
               ),

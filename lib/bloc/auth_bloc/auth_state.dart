@@ -11,6 +11,8 @@ final class AuthInitial extends AuthState {}
 
 final class AuthUserSuccess extends AuthState {}
 
+final class AuthUserSuccessSignInGoogle extends AuthState {}
+
 final class AuthUserFailed extends AuthState {
   const AuthUserFailed(this.error);
   final String error;
@@ -19,3 +21,5 @@ final class AuthUserFailed extends AuthState {
 }
 
 final class AuthUserLoading extends AuthState {}
+
+final class AuthUserLoadingGoogle extends AuthState {}

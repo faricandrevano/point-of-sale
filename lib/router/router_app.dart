@@ -27,13 +27,11 @@ final router = GoRouter(
       path: NamedRoute.routeHome,
       name: 'home',
       builder: (context, state) => const HomeScreen(),
-      routes: [
-        GoRoute(
-          path: NamedRoute.routeSettings,
-          name: 'settings',
-          builder: (context, state) => const SettingsScreen(),
-        )
-      ],
+    ),
+    GoRoute(
+      path: NamedRoute.routeSettings,
+      name: 'settings',
+      builder: (context, state) => const SettingsScreen(),
     ),
     GoRoute(
       path: NamedRoute.routeSignIn,

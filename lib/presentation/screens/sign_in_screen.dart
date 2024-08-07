@@ -42,6 +42,13 @@ class _SignInScreenState extends State<SignInScreen> {
                   description: 'User Success Login',
                   type: ToastificationType.success,
                 );
+              } else if (state is AuthUserSuccessSignInGoogle) {
+                context.go('/');
+                toastMessage(
+                  context: context,
+                  description: 'User Success Login with Google Account',
+                  type: ToastificationType.success,
+                );
               }
             },
             child: Container(
@@ -168,35 +175,48 @@ class _SignInScreenState extends State<SignInScreen> {
                       SizedBox(
                         height: 50,
                         width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            backgroundColor: neutral10,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(
-                                color: primaryMain,
-                              ),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/icons/icons_google.png',
-                                scale: 2,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                'Sign up with Google',
-                                style: bodyL.copyWith(
-                                  fontWeight: semiBold,
-                                  color: primaryMain,
+                        child: BlocBuilder<AuthBloc, AuthState>(
+                          builder: (context, state) {
+                            if (state is AuthUserLoadingGoogle) {
+                              return CustomLoadingButton(
+                                color: neutral20,
+                              );
+                            }
+                            return ElevatedButton(
+                              onPressed: () {
+                                context
+                                    .read<AuthBloc>()
+                                    .add(AuthUserSignInGoogle());
+                              },
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                backgroundColor: neutral10,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(
+                                    color: primaryMain,
+                                  ),
                                 ),
                               ),
-                            ],
-                          ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'assets/icons/icons_google.png',
+                                    scale: 2,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Sign up with Google',
+                                    style: bodyL.copyWith(
+                                      fontWeight: semiBold,
+                                      color: primaryMain,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],

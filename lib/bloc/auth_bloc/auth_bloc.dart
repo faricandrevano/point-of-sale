@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -43,7 +44,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthUserLoading());
       try {
         await FirebaseAuth.instance.signOut();
+        await GoogleSignIn().signOut();
         emit(AuthUserSuccess());
+      } on FirebaseAuthException catch (e) {
+        emit(AuthUserFailed(e.message.toString()));
+      }
+    });
+    on<AuthUserSignInGoogle>((event, emit) async {
+      emit(AuthUserLoadingGoogle());
+      try {
+        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+        if (googleUser == null) {
+          emit(const AuthUserFailed('Failed Sign In with google'));
+        }
+        final GoogleSignInAuthentication? googleAuth =
+            await googleUser?.authentication;
+        final AuthCredential credential = GoogleAuthProvider.credential(
+            accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+        await FirebaseAuth.instance.signInWithCredential(credential);
+        emit(AuthUserSuccessSignInGoogle());
       } on FirebaseAuthException catch (e) {
         emit(AuthUserFailed(e.message.toString()));
       }
