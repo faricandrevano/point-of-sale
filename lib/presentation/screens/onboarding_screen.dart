@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
+import 'package:pos/router/named_route.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -97,11 +98,14 @@ class OnboardingView extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.topRight,
-            child: Text(
-              'Skip',
-              style: bodyL.copyWith(
-                fontWeight: semiBold,
-                color: primaryMain,
+            child: GestureDetector(
+              onTap: () => context.go(NamedRoute.routeSignUp),
+              child: Text(
+                'Skip',
+                style: bodyL.copyWith(
+                  fontWeight: semiBold,
+                  color: primaryMain,
+                ),
               ),
             ),
           ),
@@ -164,7 +168,7 @@ class OnboardingView extends StatelessWidget {
             icon: Icon(Icons.arrow_forward, color: neutral10),
             onPressed: () {
               if (activePage > 1) {
-                context.goNamed('/sign-up');
+                context.go(NamedRoute.routeSignUp);
               }
               pageController.animateToPage(activePage + 1,
                   duration: const Duration(milliseconds: 300),
