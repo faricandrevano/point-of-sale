@@ -5,8 +5,11 @@ import 'package:pos/bloc/auth_bloc/auth_bloc.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
+import 'package:pos/presentation/widgets/custom_loading_button.dart';
 import 'package:pos/presentation/widgets/custom_textfield_auth.dart';
+import 'package:pos/presentation/widgets/custom_toast.dart';
 import 'package:pos/router/named_route.dart';
+import 'package:toastification/toastification.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -23,7 +26,18 @@ class SignUpScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
-              // TODO: implement listener
+              if (state is AuthUserFailed) {
+                toastMessage(
+                    context: context,
+                    description: state.error,
+                    type: ToastificationType.error);
+              } else if (state is AuthUserSuccess) {
+                toastMessage(
+                  context: context,
+                  description: 'User Success Register',
+                  type: ToastificationType.success,
+                );
+              }
             },
             child: Container(
               width: double.infinity,
@@ -78,10 +92,7 @@ class SignUpScreen extends StatelessWidget {
                       BlocBuilder<AuthBloc, AuthState>(
                         builder: (context, state) {
                           if (state is AuthUserLoading) {
-                            return ElevatedButton(
-                              onPressed: () {},
-                              child: const CircularProgressIndicator(),
-                            );
+                            return const CustomLoadingButton();
                           }
                           return CustomFilledButton(
                             label: 'Register',

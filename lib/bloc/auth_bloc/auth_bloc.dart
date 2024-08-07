@@ -11,11 +11,39 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       try {
         if (event.confirmPassword != event.password) {
           emit(const AuthUserFailed('password confirmation does not match!'));
+        } else if (event.email.isEmpty ||
+            event.password.isEmpty ||
+            event.phoneNumber.isEmpty ||
+            event.confirmPassword.isEmpty) {
+          emit(const AuthUserFailed("Value Can't Be Empty"));
         } else {
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
               email: event.email, password: event.password);
           emit(AuthUserSuccess());
         }
+      } on FirebaseAuthException catch (e) {
+        emit(AuthUserFailed(e.message.toString()));
+      }
+    });
+    on<AuthUserLogin>((event, emit) async {
+      emit(AuthUserLoading());
+      try {
+        if (event.email.isEmpty || event.password.isEmpty) {
+          emit(const AuthUserFailed("Value Can't Be Empty"));
+        } else {
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+              email: event.email, password: event.password);
+          emit(AuthUserSuccess());
+        }
+      } on FirebaseAuthException catch (e) {
+        emit(AuthUserFailed(e.message.toString()));
+      }
+    });
+    on<AuthUserLogout>((event, emit) async {
+      emit(AuthUserLoading());
+      try {
+        await FirebaseAuth.instance.signOut();
+        emit(AuthUserSuccess());
       } on FirebaseAuthException catch (e) {
         emit(AuthUserFailed(e.message.toString()));
       }

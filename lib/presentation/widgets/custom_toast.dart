@@ -8,7 +8,7 @@ toastMessage(
   return toastification.show(
     context: context,
     type: type,
-    style: ToastificationStyle.flat,
+    style: ToastificationStyle.flatColored,
     title: const Text('POS'),
     description: Text(description),
     alignment: Alignment.topCenter,
