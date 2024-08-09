@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pos/presentation/screens/cashier_screen.dart';
 import 'package:pos/presentation/screens/home_screen.dart';
 import 'package:pos/presentation/screens/onboarding_screen.dart';
+import 'package:pos/presentation/screens/product_screen.dart';
 import 'package:pos/presentation/screens/settings_screen.dart';
 import 'package:pos/presentation/screens/sign_in_screen.dart';
 import 'package:pos/presentation/screens/sign_up_screen.dart';
@@ -29,6 +31,11 @@ final router = GoRouter(
       builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
+      path: NamedRoute.routeProduct,
+      name: 'product',
+      builder: (context, state) => const ProductScreen(),
+    ),
+    GoRoute(
       path: NamedRoute.routeSettings,
       name: 'settings',
       builder: (context, state) => const SettingsScreen(),
@@ -42,6 +49,11 @@ final router = GoRouter(
       path: NamedRoute.routeSignUp,
       name: 'signUp',
       builder: (context, state) => const SignUpScreen(),
+    ),
+    GoRoute(
+      path: NamedRoute.routeSignUp,
+      name: 'cashier',
+      builder: (context, state) => const CashierScreen(),
     ),
   ],
 );

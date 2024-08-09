@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: Container(
-              height: 500,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               decoration: const BoxDecoration(
                 color: Color(0xff273040),
                 image: DecorationImage(
@@ -23,9 +23,38 @@ class HomeScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: const CustomBarChart(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            'This month transaction',
+                            style: bodyM.copyWith(
+                              color: neutral50,
+                              fontWeight: regular,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            "\$3599.00",
+                            style: headingM.copyWith(
+                              fontWeight: bold,
+                              color: neutral10,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // SizedBox()
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 190,
+                    child: CustomBarChart(),
+                  ),
+                ],
               ),
             ),
           ),
@@ -44,9 +73,10 @@ class HomeScreen extends StatelessWidget {
                     img: 'assets/icons/icon_dashboard.png',
                     title: 'Dashboard',
                   ),
-                  const CustomMenuDashboard(
+                  CustomMenuDashboard(
                     img: 'assets/icons/icon_product.png',
                     title: 'Product',
+                    onTap: () => context.push(NamedRoute.routeProduct),
                   ),
                   const CustomMenuDashboard(
                     img: 'assets/icons/icon_transaction.png',

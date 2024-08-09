@@ -4,17 +4,26 @@ import 'package:pos/presentation/constants/styles.dart';
 
 class CustomFilledButton extends StatelessWidget {
   const CustomFilledButton(
-      {super.key, required this.label, this.icon, this.onPressed});
+      {super.key,
+      required this.label,
+      this.icon,
+      this.onPressed,
+      this.width,
+      this.alignment,
+      this.height});
   final String label;
   final Icon? icon;
   final VoidCallback? onPressed;
+  final double? width;
+  final IconAlignment? alignment;
+  final double? height;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 48,
-      width: double.infinity,
+      height: height ?? 48,
+      width: width ?? double.infinity,
       child: ElevatedButton.icon(
-        iconAlignment: IconAlignment.end,
+        iconAlignment: alignment ?? IconAlignment.end,
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 0),
