@@ -3,20 +3,25 @@ import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 
 class CustomFilledButton extends StatelessWidget {
-  const CustomFilledButton(
-      {super.key,
-      required this.label,
-      this.icon,
-      this.onPressed,
-      this.width,
-      this.alignment,
-      this.height});
+  const CustomFilledButton({
+    super.key,
+    required this.label,
+    this.icon,
+    this.onPressed,
+    this.width,
+    this.alignment,
+    this.height,
+    this.color,
+    this.textColor,
+  });
   final String label;
   final Icon? icon;
   final VoidCallback? onPressed;
   final double? width;
   final IconAlignment? alignment;
   final double? height;
+  final Color? color;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -26,8 +31,10 @@ class CustomFilledButton extends StatelessWidget {
         iconAlignment: alignment ?? IconAlignment.end,
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
+          elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 0),
-          backgroundColor: primaryMain,
+          backgroundColor: color ?? primaryMain,
+          side: BorderSide(color: neutral30),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -36,7 +43,7 @@ class CustomFilledButton extends StatelessWidget {
           label,
           style: bodyL.copyWith(
             fontWeight: semiBold,
-            color: onPressed == null ? neutral60 : neutral10,
+            color: textColor ?? neutral10,
           ),
         ),
         icon: icon,

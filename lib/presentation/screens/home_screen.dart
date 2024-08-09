@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                 [
                   const CustomMenuDashboard(
                     img: 'assets/icons/icon_dashboard.png',
-                    title: 'Dashboard',
+                    title: 'Report',
                   ),
                   CustomMenuDashboard(
                     img: 'assets/icons/icon_product.png',
@@ -88,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const CustomMenuDashboard(
                     img: 'assets/icons/icon_customers.png',
-                    title: 'Csutomer',
+                    title: 'Customer',
                   ),
                   CustomMenuDashboard(
                     img: 'assets/icons/icon_settings.png',
@@ -116,7 +116,9 @@ class HomeScreen extends StatelessWidget {
                     right: 25.5,
                   ),
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push(NamedRoute.routeCashier);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryMain,
                       shape: RoundedRectangleBorder(

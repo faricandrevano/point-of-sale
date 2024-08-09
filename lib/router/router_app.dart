@@ -51,7 +51,7 @@ final router = GoRouter(
       builder: (context, state) => const SignUpScreen(),
     ),
     GoRoute(
-      path: NamedRoute.routeSignUp,
+      path: NamedRoute.routeCashier,
       name: 'cashier',
       builder: (context, state) => const CashierScreen(),
     ),
