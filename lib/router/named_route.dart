@@ -6,4 +6,5 @@ class NamedRoute {
   static const String routeSignUp = '/sign-up';
   static const String routeProduct = '/product';
   static const String routeCashier = '/cashier';
+  static const String routeDetailProductCashier = '/product-cashier';
 }

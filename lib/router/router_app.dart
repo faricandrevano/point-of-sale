@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pos/presentation/screens/cashier_screen.dart';
+import 'package:pos/presentation/screens/detail_cashier_screen.dart';
 import 'package:pos/presentation/screens/home_screen.dart';
 import 'package:pos/presentation/screens/onboarding_screen.dart';
 import 'package:pos/presentation/screens/product_screen.dart';
@@ -54,6 +55,11 @@ final router = GoRouter(
       path: NamedRoute.routeCashier,
       name: 'cashier',
       builder: (context, state) => const CashierScreen(),
+    ),
+    GoRoute(
+      path: NamedRoute.routeDetailProductCashier,
+      name: 'cashier detail',
+      builder: (context, state) => const DetailCashierScreen(),
     ),
   ],
 );

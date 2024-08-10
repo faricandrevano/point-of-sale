@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_chip_category.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
 import 'package:pos/presentation/widgets/custom_product_cashier.dart';
+import 'package:pos/router/named_route.dart';
 
 class CashierScreen extends StatelessWidget {
   const CashierScreen({super.key});
@@ -137,18 +139,20 @@ class CashierScreen extends StatelessWidget {
                 crossAxisSpacing: 16,
                 crossAxisCount: 2,
                 physics: const ScrollPhysics(),
-                children: const [
+                children: [
                   CustomProductCashier(
                     img: 'assets/dummy/img_product1.png',
                     price: 'Rp 32.000',
                     title: "Women's Turtleneck Sweater",
+                    onTap: () =>
+                        context.push(NamedRoute.routeDetailProductCashier),
                   ),
-                  CustomProductCashier(
+                  const CustomProductCashier(
                     img: 'assets/dummy/img_product2.png',
                     price: 'Rp 32.000',
                     title: "Women's Knitted Top",
                   ),
-                  CustomProductCashier(
+                  const CustomProductCashier(
                     img: 'assets/dummy/img_product1.png',
                     price: 'Rp 32.000',
                     title: "Women's Turtleneck Sweater",

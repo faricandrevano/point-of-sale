@@ -4,13 +4,19 @@ import 'package:pos/presentation/constants/styles.dart';
 
 class CustomProductCashier extends StatelessWidget {
   const CustomProductCashier(
-      {super.key, required this.img, required this.price, required this.title});
+      {super.key,
+      required this.img,
+      required this.price,
+      required this.title,
+      this.onTap});
   final String img;
   final String title;
   final String price;
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return GestureDetector(
+      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
