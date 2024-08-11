@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
 import 'package:pos/presentation/widgets/custom_product_list.dart';
 import 'package:pos/presentation/widgets/custom_search_bar.dart';
+import 'package:pos/router/named_route.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -59,7 +61,9 @@ class _ProductScreenState extends State<ProductScreen> {
                     width: 99,
                     height: 40,
                     alignment: IconAlignment.start,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push(NamedRoute.routeProductDataScreen);
+                    },
                     icon: Icon(
                       Icons.add,
                       color: neutral10,

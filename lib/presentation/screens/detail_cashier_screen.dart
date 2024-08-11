@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
+import 'package:pos/presentation/widgets/custom_filled_button.dart';
 
 class DetailCashierScreen extends StatefulWidget {
   const DetailCashierScreen({super.key});
@@ -34,7 +35,6 @@ class _DetailCashierScreenState extends State<DetailCashierScreen> {
             child: Image.asset('assets/dummy/img_product1.png'),
           ),
           Container(
-            height: 400,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             width: double.infinity,
             decoration: BoxDecoration(
@@ -172,6 +172,16 @@ class _DetailCashierScreenState extends State<DetailCashierScreen> {
                     )
                   ],
                 ),
+                const SizedBox(height: 16),
+                CustomFilledButton(
+                  label: 'Add to cart',
+                  onPressed: () {},
+                  alignment: IconAlignment.start,
+                  icon: Icon(
+                    Icons.shopping_bag_outlined,
+                    color: neutral10,
+                  ),
+                )
               ],
             ),
           )
