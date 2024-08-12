@@ -24,4 +24,18 @@ class RupiahTextInputFormatter extends TextInputFormatter {
       selection: TextSelection.collapsed(offset: formattedValue.length),
     );
   }
+
+  // Fungsi untuk mengubah nilai Rupiah menjadi double
+  static double parse(String value) {
+    // Menghilangkan simbol Rp dan semua karakter non-digit dan non-koma
+    String cleanedString = value.replaceAll(RegExp(r'[^\d,]'), '');
+
+    // Mengganti tanda koma dengan titik untuk pemisah desimal
+    cleanedString = cleanedString.replaceAll(',', '.');
+
+    // Mengubah string menjadi double
+    final doubleValue = double.tryParse(cleanedString) ?? 0.0;
+
+    return doubleValue;
+  }
 }

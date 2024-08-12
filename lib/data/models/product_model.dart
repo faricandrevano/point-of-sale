@@ -4,14 +4,12 @@ class ProductModel {
     required this.category,
     required this.price,
     required this.sku,
-    required this.gender,
     required this.description,
   });
   final String productName;
   final String sku;
   final double price;
   final String category;
-  final String gender;
   final String description;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -20,7 +18,6 @@ class ProductModel {
       category: json['category'],
       price: json['price'],
       sku: json['sku'],
-      gender: json['gender'],
       description: json['description'],
     );
   }
@@ -30,7 +27,6 @@ class ProductModel {
       'category': category,
       'price': price,
       'sku': sku,
-      'gender': gender,
       'description': description,
     };
   }

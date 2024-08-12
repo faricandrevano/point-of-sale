@@ -3,19 +3,20 @@ import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 
 class CustomFilledButton extends StatelessWidget {
-  const CustomFilledButton({
-    super.key,
-    required this.label,
-    this.icon,
-    this.onPressed,
-    this.width,
-    this.alignment,
-    this.height,
-    this.color,
-    this.textColor,
-  });
-  final String label;
+  const CustomFilledButton(
+      {super.key,
+      this.label,
+      this.icon,
+      this.onPressed,
+      this.width,
+      this.alignment,
+      this.height,
+      this.color,
+      this.textColor,
+      this.loading = false});
+  final String? label;
   final Icon? icon;
+  final bool loading;
   final VoidCallback? onPressed;
   final double? width;
   final IconAlignment? alignment;
@@ -39,13 +40,15 @@ class CustomFilledButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        label: Text(
-          label,
-          style: bodyL.copyWith(
-            fontWeight: semiBold,
-            color: textColor ?? neutral10,
-          ),
-        ),
+        label: loading
+            ? const CircularProgressIndicator()
+            : Text(
+                label!,
+                style: bodyL.copyWith(
+                  fontWeight: semiBold,
+                  color: textColor ?? neutral10,
+                ),
+              ),
         icon: icon,
       ),
     );

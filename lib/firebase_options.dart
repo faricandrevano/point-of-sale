@@ -87,4 +87,5 @@ class DefaultFirebaseOptions {
     authDomain: 'pointofsale-fa2ce.firebaseapp.com',
     storageBucket: 'pointofsale-fa2ce.appspot.com',
   );
+
 }

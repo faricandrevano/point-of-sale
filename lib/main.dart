@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:pos/blocs/auth_bloc/auth_bloc.dart';
+import 'package:pos/blocs/product_bloc/product_bloc.dart';
 import 'package:pos/firebase_options.dart';
 import 'package:pos/router/router_app.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+        BlocProvider<ProductBloc>(create: (context) => ProductBloc())
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
