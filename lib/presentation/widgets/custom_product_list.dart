@@ -39,7 +39,7 @@ class _CustomProductListState extends State<CustomProductList> {
               SizedBox(
                 height: 120,
                 width: 90,
-                child: Image.asset(widget.img),
+                child: Image.network(widget.img),
               ),
               const SizedBox(width: 12),
               Expanded(

@@ -12,11 +12,14 @@ final class ProductInitial extends ProductState {}
 final class ProductLoading extends ProductState {}
 
 final class ProductSuccess extends ProductState {
-  const ProductSuccess(this.message);
+  const ProductSuccess({required this.message, required this.event});
   final String message;
+  final ProductEvent event;
   @override
   List<Object> get props => [message];
 }
+
+final class ProductEmpty extends ProductState {}
 
 final class ProductFailed extends ProductState {
   const ProductFailed(this.error);

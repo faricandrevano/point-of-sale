@@ -14,7 +14,13 @@ final class ProductAdded extends ProductEvent {
   List<Object> get props => [data];
 }
 
-final class ProductDelete extends ProductEvent {}
+final class ProductFetch extends ProductEvent {}
+
+final class ProductDelete extends ProductEvent {
+  const ProductDelete({this.id, this.sku});
+  final String? id;
+  final String? sku;
+}
 
 final class ProductPickedImage extends ProductEvent {}
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pos/blocs/product_bloc/product_bloc.dart';
 import 'package:pos/data/models/product_model.dart';
 import 'package:pos/presentation/constants/colors.dart';
@@ -7,6 +8,7 @@ import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
 import 'package:pos/presentation/widgets/custom_multi_image.dart';
 import 'package:pos/presentation/widgets/custom_toast.dart';
+import 'package:pos/router/named_route.dart';
 import 'package:pos/utils/currency_formatter.dart';
 import 'package:toastification/toastification.dart';
 
@@ -59,6 +61,7 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
                   description: state.error,
                   type: ToastificationType.error);
             } else if (state is ProductUploadData) {
+              context.go(NamedRoute.routeProduct);
               toastMessage(
                   context: context,
                   description: state.message,
@@ -126,12 +129,14 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
                     onPressed: () {
                       double price = RupiahTextInputFormatter.parse(
                           pricingController.text);
-                      context.read<ProductBloc>().add(ProductAdded(ProductModel(
-                          productName: nameController.text,
-                          category: selectedCategory,
-                          price: price,
-                          sku: skuController.text,
-                          description: descController.text)));
+                      context.read<ProductBloc>().add(ProductAdded(
+                            ProductModel(
+                                productName: nameController.text,
+                                category: selectedCategory,
+                                price: price,
+                                sku: skuController.text,
+                                description: descController.text),
+                          ));
                     },
                     alignment: IconAlignment.start,
                     icon: Icon(
