@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pos/blocs/product_bloc/product_bloc.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
+import 'package:pos/presentation/widgets/custom_dialog.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
 import 'package:pos/presentation/widgets/custom_product_list.dart';
 import 'package:pos/presentation/widgets/custom_search_bar.dart';
@@ -29,6 +30,10 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () => context.push(NamedRoute.routeHome),
+          child: const Icon(Icons.arrow_back),
+        ),
         title: Text(
           'Product',
           style: bodyXXL.copyWith(
@@ -114,15 +119,31 @@ class _ProductScreenState extends State<ProductScreen> {
                             stock: 102,
                             title: state.data[index].productName,
                             delete: () {
-                              context.read<ProductBloc>().add(
-                                    ProductDelete(
-                                      id: state.data[index].id.toString(),
-                                      sku: state.data[index].sku.toString(),
-                                    ),
-                                  );
+                              showDialog(
+                                context: context,
+                                builder: (context) => CustomDialog(
+                                  actionText: 'Delete',
+                                  body:
+                                      'Are you sure want to delete this product?',
+                                  onPressed: () {
+                                    context.read<ProductBloc>().add(
+                                          ProductDelete(
+                                            id: state.data[index].id.toString(),
+                                            sku: state.data[index].sku
+                                                .toString(),
+                                          ),
+                                        );
+                                  },
+                                  title: 'Remove Product',
+                                ),
+                              );
                             },
                             editPrice: () {},
                             editStock: () {},
+                            onTap: () => context.push(
+                              NamedRoute.routeDetailProductScreen,
+                              extra: state.data[index],
+                            ),
                           );
                         },
                       );

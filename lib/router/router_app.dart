@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pos/data/models/product_model.dart';
 import 'package:pos/presentation/screens/cashier_screen.dart';
 import 'package:pos/presentation/screens/detail_cashier_screen.dart';
 import 'package:pos/presentation/screens/home_screen.dart';
 import 'package:pos/presentation/screens/onboarding_screen.dart';
 import 'package:pos/presentation/screens/product_data_screen.dart';
+import 'package:pos/presentation/screens/product_detail_screen.dart';
 import 'package:pos/presentation/screens/product_screen.dart';
 import 'package:pos/presentation/screens/settings_screen.dart';
 import 'package:pos/presentation/screens/sign_in_screen.dart';
@@ -66,6 +68,16 @@ final router = GoRouter(
       path: NamedRoute.routeProductDataScreen,
       name: 'product data',
       builder: (context, state) => const ProductDataScreen(),
+    ),
+    GoRoute(
+      path: NamedRoute.routeDetailProductScreen,
+      name: 'product detail data',
+      builder: (context, state) {
+        ProductModel args = state.extra as ProductModel;
+        return ProductDetailScreen(
+          data: args,
+        );
+      },
     ),
   ],
 );
