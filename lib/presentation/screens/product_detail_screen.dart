@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pos/blocs/product_bloc/product_bloc.dart';
 import 'package:pos/data/models/product_model.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
@@ -12,6 +14,13 @@ class ProductDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            context.read<ProductBloc>().add(ProductFetch());
+            context.pop();
+          },
+          child: const Icon(Icons.arrow_back),
+        ),
         forceMaterialTransparency: true,
         centerTitle: true,
         title: Text(
@@ -24,7 +33,7 @@ class ProductDetailScreen extends StatelessWidget {
         actions: [
           GestureDetector(
             onTap: () {
-              context.push(NamedRoute.routeProductDataScreen);
+              context.push(NamedRoute.routeProductUpdateScreen, extra: data);
             },
             child: Text(
               'Edit',
@@ -45,7 +54,7 @@ class ProductDetailScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  child: Image.asset('assets/dummy/img_product1.png'),
+                  child: Image.network(data.images![0]),
                 ),
                 const SizedBox(height: 16),
                 Divider(color: neutral20),

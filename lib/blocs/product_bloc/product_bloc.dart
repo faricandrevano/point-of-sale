@@ -120,5 +120,19 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(const ProductFailed('Gagal hapus Product'));
       }
     });
+    on<ProductFetchImage>((event, emit) async {
+      try {
+        final dataImage = await storage
+            .ref()
+            .child('product_images')
+            .child(event.sku.toString())
+            .listAll();
+        List<String> dataResult = await Future.wait(
+            dataImage.items.map((image) => image.getDownloadURL()));
+        emit(ProductImageUpdateLoaded([dataResult]));
+      } catch (e) {
+        emit(const ProductFailed('Gagal Ambil Image Product'));
+      }
+    });
   }
 }

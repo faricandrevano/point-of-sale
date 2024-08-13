@@ -44,7 +44,14 @@ final class ProductLoaded extends ProductState {
 
 final class ProductImageLoaded extends ProductState {
   const ProductImageLoaded(this.images);
-  final List<File> images;
+  final List images;
+  @override
+  List<Object> get props => [images];
+}
+
+final class ProductImageUpdateLoaded extends ProductState {
+  const ProductImageUpdateLoaded(this.images);
+  final List images;
   @override
   List<Object> get props => [images];
 }

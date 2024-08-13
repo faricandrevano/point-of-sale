@@ -13,8 +13,8 @@ import 'package:pos/utils/currency_formatter.dart';
 import 'package:toastification/toastification.dart';
 
 class ProductDataScreen extends StatefulWidget {
-  const ProductDataScreen({super.key});
-
+  const ProductDataScreen({super.key, this.product});
+  final ProductModel? product;
   @override
   State<ProductDataScreen> createState() => _ProductDataScreenState();
 }
@@ -26,11 +26,25 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
   final TextEditingController descController = TextEditingController();
   String selectedCategory = '';
   @override
+  void initState() {
+    super.initState();
+    if (widget.product != null) {
+      nameController.text = widget.product!.productName;
+      skuController.text = widget.product!.sku;
+      pricingController.text = widget.product!.price.toString();
+      descController.text = widget.product!.description;
+      selectedCategory = widget.product!.category;
+      context.read<ProductBloc>().add(ProductFetchImage(widget.product!.sku));
+    }
+  }
+
+  @override
   void dispose() {
     super.dispose();
     nameController.dispose();
     skuController.dispose();
     pricingController.dispose();
+    descController.dispose();
   }
 
   @override
@@ -38,7 +52,7 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Add Product',
+          widget.product != null ? 'Edit Product' : 'Add Product',
           style: bodyXXL.copyWith(
             fontWeight: bold,
             color: neutral90,
@@ -61,11 +75,12 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
                   description: state.error,
                   type: ToastificationType.error);
             } else if (state is ProductUploadData) {
-              context.go(NamedRoute.routeProduct);
               toastMessage(
                   context: context,
                   description: state.message,
                   type: ToastificationType.success);
+              context.read<ProductBloc>().add(ProductFetch());
+              context.go(NamedRoute.routeProduct);
             }
           },
           child: SingleChildScrollView(
@@ -97,6 +112,7 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
                 ),
                 Divider(color: neutral20),
                 ColumnDropdown(
+                  selected: selectedCategory.isEmpty ? null : selectedCategory,
                   onChanged: (value) {
                     selectedCategory = value;
                   },
@@ -107,7 +123,11 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
                       'Please select your product category from the list provided.',
                 ),
                 Divider(color: neutral20),
-                const CustomMultiImage(),
+                widget.product == null
+                    ? const CustomMultiImage()
+                    : CustomMultiImage(
+                        updateImage: widget.product!.images,
+                      ),
                 Divider(color: neutral20),
                 ColumnText(
                   controller: descController,
@@ -161,17 +181,18 @@ class ColumnDropdown extends StatefulWidget {
       required this.items,
       required this.hintText,
       this.desc,
-      required this.onChanged});
+      required this.onChanged,
+      required this.selected});
   final String label, hintText;
   final List<String> items;
   final String? desc;
+  final String? selected;
   final ValueChanged onChanged;
   @override
   State<ColumnDropdown> createState() => _ColumnDropdownState();
 }
 
 class _ColumnDropdownState extends State<ColumnDropdown> {
-  String? selectedCategory;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -206,7 +227,7 @@ class _ColumnDropdownState extends State<ColumnDropdown> {
             ),
           ),
           hint: Text(widget.hintText),
-          value: selectedCategory,
+          value: widget.selected,
           elevation: 0,
           items: widget.items
               .map(
@@ -217,9 +238,6 @@ class _ColumnDropdownState extends State<ColumnDropdown> {
               )
               .toList(),
           onChanged: (value) {
-            setState(() {
-              selectedCategory = value;
-            });
             widget.onChanged(value);
           },
         )

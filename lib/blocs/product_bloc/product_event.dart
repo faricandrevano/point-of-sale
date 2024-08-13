@@ -24,6 +24,11 @@ final class ProductDelete extends ProductEvent {
 
 final class ProductPickedImage extends ProductEvent {}
 
+final class ProductFetchImage extends ProductEvent {
+  const ProductFetchImage(this.sku);
+  final String? sku;
+}
+
 final class ProductRemoveImage extends ProductEvent {
   const ProductRemoveImage(this.index);
   final int index;

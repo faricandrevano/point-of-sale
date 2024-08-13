@@ -27,6 +27,11 @@ class _ProductScreenState extends State<ProductScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -111,6 +116,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       return ListView.builder(
                         itemCount: state.data.length,
                         shrinkWrap: true,
+                        physics: const ScrollPhysics(),
                         itemBuilder: (context, index) {
                           return CustomProductList(
                             category: state.data[index].category,
@@ -133,6 +139,8 @@ class _ProductScreenState extends State<ProductScreen> {
                                                 .toString(),
                                           ),
                                         );
+
+                                    context.pop();
                                   },
                                   title: 'Remove Product',
                                 ),

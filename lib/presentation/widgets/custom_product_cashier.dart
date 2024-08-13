@@ -23,7 +23,7 @@ class CustomProductCashier extends StatelessWidget {
           SizedBox(
             height: 202,
             width: 171,
-            child: Image.asset(img),
+            child: Image.network(img),
           ),
           const SizedBox(height: 12),
           Text(

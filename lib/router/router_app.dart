@@ -70,6 +70,16 @@ final router = GoRouter(
       builder: (context, state) => const ProductDataScreen(),
     ),
     GoRoute(
+      path: NamedRoute.routeProductUpdateScreen,
+      name: 'product update data',
+      builder: (context, state) {
+        ProductModel product = state.extra as ProductModel;
+        return ProductDataScreen(
+          product: product,
+        );
+      },
+    ),
+    GoRoute(
       path: NamedRoute.routeDetailProductScreen,
       name: 'product detail data',
       builder: (context, state) {

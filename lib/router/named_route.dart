@@ -8,5 +8,6 @@ class NamedRoute {
   static const String routeCashier = '/cashier';
   static const String routeDetailProductCashier = '/product-cashier';
   static const String routeProductDataScreen = '/product-data';
+  static const String routeProductUpdateScreen = '/product-update-data';
   static const String routeDetailProductScreen = '/detail-product';
 }
