@@ -11,6 +11,8 @@ final class CartInitial extends CartState {}
 
 final class CartLoading extends CartState {}
 
+final class CartEmpty extends CartState {}
+
 final class CartFailed extends CartState {
   const CartFailed(this.error);
   final String error;

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pos/data/models/product_model.dart';
+import 'package:pos/presentation/screens/cart_screen.dart';
 import 'package:pos/presentation/screens/cashier_screen.dart';
 import 'package:pos/presentation/screens/detail_cashier_screen.dart';
 import 'package:pos/presentation/screens/home_screen.dart';
@@ -93,6 +94,11 @@ final router = GoRouter(
           data: args,
         );
       },
+    ),
+    GoRoute(
+      path: NamedRoute.routeCartScreen,
+      name: 'Carts data',
+      builder: (context, state) => const CartScreen(),
     ),
   ],
 );

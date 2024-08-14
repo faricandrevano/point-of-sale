@@ -8,10 +8,12 @@ class CustomProductCashier extends StatelessWidget {
       required this.img,
       required this.price,
       required this.title,
+      required this.stock,
       this.onTap});
   final String img;
   final String title;
   final String price;
+  final int stock;
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
@@ -26,14 +28,14 @@ class CustomProductCashier extends StatelessWidget {
             child: Image.network(img),
           ),
           const SizedBox(height: 12),
-          Text(
-            "Winter Collections",
-            style: bodyM.copyWith(
-              color: neutral60,
-              fontWeight: regular,
-            ),
-          ),
-          const SizedBox(height: 8),
+          // Text(
+          //   "Winter Collections",
+          //   style: bodyM.copyWith(
+          //     color: neutral60,
+          //     fontWeight: regular,
+          //   ),
+          // ),
+          // const SizedBox(height: 8),
           Text(
             title,
             style: bodyL.copyWith(
@@ -42,6 +44,8 @@ class CustomProductCashier extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
+          Text('${stock.toString()} Stock'),
+          const SizedBox(height: 4),
           Text(
             price,
             style: bodyL.copyWith(

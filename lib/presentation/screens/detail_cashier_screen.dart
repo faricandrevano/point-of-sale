@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pos/blocs/cart_bloc/cart_bloc.dart';
 import 'package:pos/data/models/cart_model.dart';
 import 'package:pos/data/models/product_model.dart';
@@ -8,6 +9,7 @@ import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
 import 'package:pos/presentation/widgets/custom_loading_button.dart';
 import 'package:pos/presentation/widgets/custom_toast.dart';
+import 'package:pos/router/named_route.dart';
 import 'package:pos/utils/currency_formatter.dart';
 import 'package:toastification/toastification.dart';
 
@@ -30,6 +32,7 @@ class _DetailCashierScreenState extends State<DetailCashierScreen> {
     Colors.orange,
     Colors.black
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +41,8 @@ class _DetailCashierScreenState extends State<DetailCashierScreen> {
         forceMaterialTransparency: true,
       ),
       body: BlocListener<CartBloc, CartState>(
+        listenWhen: (previous, current) =>
+            (current is CartSuccess && current != previous),
         listener: (context, state) {
           if (state is CartFailed) {
             toastMessage(
@@ -49,6 +54,7 @@ class _DetailCashierScreenState extends State<DetailCashierScreen> {
                 context: context,
                 description: state.messsage,
                 type: ToastificationType.success);
+            context.push(NamedRoute.routeCashier);
           }
         },
         child: Column(

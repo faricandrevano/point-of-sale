@@ -23,9 +23,4 @@ final class CartUpdateQty extends CartEvent {
   const CartUpdateQty({required this.id, required this.qty});
 }
 
-final class GetProductCart extends CartEvent {
-  const GetProductCart(this.items);
-  final CartModel items;
-  @override
-  List<Object> get props => [items];
-}
+final class GetProductCart extends CartEvent {}

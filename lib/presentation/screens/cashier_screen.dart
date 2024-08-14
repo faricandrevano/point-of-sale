@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pos/blocs/cart_bloc/cart_bloc.dart';
 import 'package:pos/blocs/cashier_bloc/cashier_bloc.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
@@ -26,12 +27,19 @@ class _CashierScreenState extends State<CashierScreen> {
   void initState() {
     super.initState();
     context.read<CashierBloc>().add(CashierFetchProduct());
+    context.read<CartBloc>().add(GetProductCart());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            context.push(NamedRoute.routeHome);
+          },
+          child: const Icon(Icons.arrow_back),
+        ),
         forceMaterialTransparency: true,
         title: Text(
           'Cashier',
@@ -43,16 +51,27 @@ class _CashierScreenState extends State<CashierScreen> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: BlocListener<CashierBloc, CashierState>(
-          listener: (context, state) {
-            if (state is CashierFailed) {
-              context.read<CashierBloc>().add(CashierFetchProduct());
-              toastMessage(
-                  context: context,
-                  description: state.error,
-                  type: ToastificationType.error);
-            }
-          },
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<CashierBloc, CashierState>(
+              listener: (context, state) {
+                if (state is CashierFailed) {
+                  context.read<CashierBloc>().add(CashierFetchProduct());
+                  toastMessage(
+                      context: context,
+                      description: state.error,
+                      type: ToastificationType.error);
+                }
+              },
+            ),
+            BlocListener<CartBloc, CartState>(
+              listener: (context, state) {
+                if (state is CartLoaded) {
+                  _showModalBottomSheet(context, state.cart);
+                }
+              },
+            ),
+          ],
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(
@@ -173,6 +192,7 @@ class _CashierScreenState extends State<CashierScreen> {
                         itemCount: state.product.length,
                         itemBuilder: (context, index) {
                           return CustomProductCashier(
+                            stock: state.product[index].stock,
                             img: state.product[index].images![0],
                             price: RupiahTextInputFormatter.format(
                                 state.product[index].price),
@@ -199,6 +219,7 @@ class _CashierScreenState extends State<CashierScreen> {
   void _showModalBottomSheet(BuildContext context, List<CartModel> items) {
     if (items.isNotEmpty) {
       showBottomSheet(
+          enableDrag: false,
           context: context,
           builder: (BuildContext context) {
             return CustomCartBottomSheet(items: items);

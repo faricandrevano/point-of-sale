@@ -31,13 +31,15 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       if (event is GetProductCart) {
         try {
           QuerySnapshot snapshot = await refCart.get();
-          List<CartModel> cartData = snapshot.docs.map((data) {
-            Map<String, dynamic> dataResult =
-                data.data() as Map<String, dynamic>;
-            dataResult['id'] = data.id;
-            return CartModel.fromJson(dataResult);
-          }).toList();
-          emit(CartLoaded(cartData));
+          if (snapshot.docs.isNotEmpty) {
+            List<CartModel> cartData = snapshot.docs.map((data) {
+              Map<String, dynamic> dataResult =
+                  data.data() as Map<String, dynamic>;
+              dataResult['id'] = data.id;
+              return CartModel.fromJson(dataResult);
+            }).toList();
+            emit(CartLoaded(cartData));
+          }
         } catch (e) {
           emit(const CartFailed('Gagal Load keranjang'));
         }
