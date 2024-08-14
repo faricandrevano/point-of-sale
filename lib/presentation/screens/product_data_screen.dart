@@ -24,6 +24,7 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
   final TextEditingController skuController = TextEditingController();
   final TextEditingController pricingController = TextEditingController();
   final TextEditingController descController = TextEditingController();
+  final TextEditingController stockController = TextEditingController();
   String selectedCategory = '';
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
       pricingController.text = widget.product!.price.toString();
       descController.text = widget.product!.description;
       selectedCategory = widget.product!.category;
+
       context.read<ProductBloc>().add(ProductFetchImage(widget.product!.sku));
     }
   }
@@ -105,6 +107,13 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
                 ),
                 Divider(color: neutral20),
                 ColumnText(
+                  controller: stockController,
+                  hint: "Enter Stock",
+                  label: "Stock",
+                  desc: "Enter Stock Product",
+                ),
+                Divider(color: neutral20),
+                ColumnText(
                   controller: pricingController,
                   hint: "000",
                   label: "Pricing",
@@ -154,6 +163,7 @@ class _ProductDataScreenState extends State<ProductDataScreen> {
                                 productName: nameController.text,
                                 category: selectedCategory,
                                 price: price,
+                                stock: int.parse(stockController.text),
                                 sku: skuController.text,
                                 description: descController.text),
                           ));

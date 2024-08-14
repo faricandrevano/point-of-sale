@@ -10,6 +10,7 @@ import 'package:pos/presentation/widgets/custom_product_list.dart';
 import 'package:pos/presentation/widgets/custom_search_bar.dart';
 import 'package:pos/presentation/widgets/custom_toast.dart';
 import 'package:pos/router/named_route.dart';
+import 'package:pos/utils/currency_formatter.dart';
 import 'package:toastification/toastification.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -121,7 +122,8 @@ class _ProductScreenState extends State<ProductScreen> {
                           return CustomProductList(
                             category: state.data[index].category,
                             img: state.data[index].images![0],
-                            price: state.data[index].price,
+                            price: RupiahTextInputFormatter.format(
+                                state.data[index].price),
                             stock: 102,
                             title: state.data[index].productName,
                             delete: () {

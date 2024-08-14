@@ -15,7 +15,8 @@ class CustomProductList extends StatefulWidget {
       required this.editStock,
       required this.onTap});
   final String category, title, img;
-  final double stock, price;
+  final double stock;
+  final String price;
   final VoidCallback editStock, editPrice, delete, onTap;
   @override
   State<CustomProductList> createState() => _CustomProductListState();

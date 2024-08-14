@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pos/data/models/product_model.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
+import 'package:pos/utils/currency_formatter.dart';
 
 class DetailCashierScreen extends StatefulWidget {
-  const DetailCashierScreen({super.key});
-
+  const DetailCashierScreen({super.key, required this.product});
+  final ProductModel product;
   @override
   State<DetailCashierScreen> createState() => _DetailCashierScreenState();
 }
@@ -56,7 +58,7 @@ class _DetailCashierScreenState extends State<DetailCashierScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Women's Grey T-Shirt",
+                  widget.product.productName,
                   style: headingS.copyWith(
                     color: neutral90,
                     fontWeight: medium,
@@ -135,7 +137,7 @@ class _DetailCashierScreenState extends State<DetailCashierScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Rp 23.400,00',
+                      RupiahTextInputFormatter.format(widget.product.price),
                       style:
                           headingS.copyWith(color: neutral90, fontWeight: bold),
                     ),

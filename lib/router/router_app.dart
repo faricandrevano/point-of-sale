@@ -62,7 +62,12 @@ final router = GoRouter(
     GoRoute(
       path: NamedRoute.routeDetailProductCashier,
       name: 'cashier detail',
-      builder: (context, state) => const DetailCashierScreen(),
+      builder: (context, state) {
+        ProductModel product = state.extra as ProductModel;
+        return DetailCashierScreen(
+          product: product,
+        );
+      },
     ),
     GoRoute(
       path: NamedRoute.routeProductDataScreen,

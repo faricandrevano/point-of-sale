@@ -9,6 +9,7 @@ import 'package:pos/presentation/widgets/custom_filled_button.dart';
 import 'package:pos/presentation/widgets/custom_product_cashier.dart';
 import 'package:pos/presentation/widgets/custom_toast.dart';
 import 'package:pos/router/named_route.dart';
+import 'package:pos/utils/currency_formatter.dart';
 import 'package:toastification/toastification.dart';
 
 class CashierScreen extends StatefulWidget {
@@ -171,10 +172,13 @@ class _CashierScreenState extends State<CashierScreen> {
                         itemBuilder: (context, index) {
                           return CustomProductCashier(
                             img: state.product[index].images![0],
-                            price: 'Rp 32.000',
+                            price: RupiahTextInputFormatter.format(
+                                state.product[index].price),
                             title: "Women's Turtleneck Sweater",
-                            onTap: () => context
-                                .push(NamedRoute.routeDetailProductCashier),
+                            onTap: () => context.push(
+                              NamedRoute.routeDetailProductCashier,
+                              extra: state.product[index],
+                            ),
                           );
                         },
                       );

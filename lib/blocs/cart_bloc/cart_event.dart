@@ -8,3 +8,26 @@ sealed class CartEvent extends Equatable {
 }
 
 final class CartFetchProduct extends CartEvent {}
+
+final class CartItemAdd extends CartEvent {
+  const CartItemAdd(this.items);
+  final CartModel items;
+}
+
+final class CartItemRemove extends CartEvent {
+  const CartItemRemove(this.id);
+  final String id;
+}
+
+final class CartUpdateQty extends CartEvent {
+  final String id;
+  final int qty;
+  const CartUpdateQty({required this.id, required this.qty});
+}
+
+final class GetProductCart extends CartEvent {
+  const GetProductCart(this.items);
+  final CartModel items;
+  @override
+  List<Object> get props => [items];
+}

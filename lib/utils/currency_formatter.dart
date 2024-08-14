@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class RupiahTextInputFormatter extends TextInputFormatter {
-  final NumberFormat _currencyFormatter =
+  static final NumberFormat _currencyFormatter =
       NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 0);
 
   @override
@@ -37,5 +37,10 @@ class RupiahTextInputFormatter extends TextInputFormatter {
     final doubleValue = double.tryParse(cleanedString) ?? 0.0;
 
     return doubleValue;
+  }
+
+  static String format(double value) {
+    final formattedValue = _currencyFormatter.format(value);
+    return formattedValue;
   }
 }

@@ -24,3 +24,17 @@ final class CartFailed extends CartState {
   @override
   List<Object> get props => [error];
 }
+
+final class CartSuccess extends CartState {
+  const CartSuccess(this.messsage);
+  final String messsage;
+  @override
+  List<Object> get props => [messsage];
+}
+
+final class CartLoaded extends CartState {
+  const CartLoaded(this.cart);
+  final List<CartModel> cart;
+  @override
+  List<Object> get props => [cart];
+}
