@@ -6,8 +6,10 @@ import 'package:pos/presentation/widgets/custom_filled_button.dart';
 import 'package:pos/utils/currency_formatter.dart';
 
 class CustomCartBottomSheet extends StatelessWidget {
-  const CustomCartBottomSheet({super.key, required this.items});
+  const CustomCartBottomSheet(
+      {super.key, required this.items, required this.onPressed});
   final List<CartModel> items;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     double total = items.fold(0, (sum, item) => sum + (item.price * item.qty));
@@ -18,6 +20,10 @@ class CustomCartBottomSheet extends StatelessWidget {
       height: 120,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
@@ -68,7 +74,7 @@ class CustomCartBottomSheet extends StatelessWidget {
                   label: RupiahTextInputFormatter.format(total),
                   width: 180,
                   height: 48,
-                  onPressed: () {},
+                  onPressed: onPressed,
                   alignment: IconAlignment.start,
                   icon: Icon(
                     Icons.shopify_outlined,

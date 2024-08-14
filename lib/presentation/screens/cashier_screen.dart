@@ -219,11 +219,15 @@ class _CashierScreenState extends State<CashierScreen> {
   void _showModalBottomSheet(BuildContext context, List<CartModel> items) {
     if (items.isNotEmpty) {
       showBottomSheet(
-          enableDrag: false,
-          context: context,
-          builder: (BuildContext context) {
-            return CustomCartBottomSheet(items: items);
-          });
+        enableDrag: false,
+        context: context,
+        builder: (BuildContext context) {
+          return CustomCartBottomSheet(
+            items: items,
+            onPressed: () => context.push(NamedRoute.routeCartScreen),
+          );
+        },
+      );
     }
   }
 }
