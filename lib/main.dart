@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:pos/blocs/auth_bloc/auth_bloc.dart';
 import 'package:pos/blocs/cart_bloc/cart_bloc.dart';
+import 'package:pos/blocs/cashier_bloc/cashier_bloc.dart';
 import 'package:pos/blocs/product_bloc/product_bloc.dart';
 import 'package:pos/firebase_options.dart';
 import 'package:pos/router/router_app.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
         BlocProvider<ProductBloc>(create: (context) => ProductBloc()),
         BlocProvider<CartBloc>(create: (context) => CartBloc()),
+        BlocProvider<CashierBloc>(create: (context) => CashierBloc()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

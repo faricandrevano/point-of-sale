@@ -7,8 +7,6 @@ sealed class CartEvent extends Equatable {
   List<Object> get props => [];
 }
 
-final class CartFetchProduct extends CartEvent {}
-
 final class CartItemAdd extends CartEvent {
   const CartItemAdd(this.items);
   final CartModel items;

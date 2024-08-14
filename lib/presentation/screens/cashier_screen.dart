@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pos/blocs/cart_bloc/cart_bloc.dart';
+import 'package:pos/blocs/cashier_bloc/cashier_bloc.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
+import 'package:pos/presentation/widgets/custom_cart_bottom_sheet.dart';
 import 'package:pos/presentation/widgets/custom_chip_category.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
 import 'package:pos/presentation/widgets/custom_product_cashier.dart';
@@ -11,6 +12,7 @@ import 'package:pos/presentation/widgets/custom_toast.dart';
 import 'package:pos/router/named_route.dart';
 import 'package:pos/utils/currency_formatter.dart';
 import 'package:toastification/toastification.dart';
+import 'package:pos/data/models/cart_model.dart';
 
 class CashierScreen extends StatefulWidget {
   const CashierScreen({super.key});
@@ -23,7 +25,7 @@ class _CashierScreenState extends State<CashierScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<CartBloc>().add(CartFetchProduct());
+    context.read<CashierBloc>().add(CashierFetchProduct());
   }
 
   @override
@@ -41,10 +43,10 @@ class _CashierScreenState extends State<CashierScreen> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: BlocListener<CartBloc, CartState>(
+        child: BlocListener<CashierBloc, CashierState>(
           listener: (context, state) {
-            if (state is CartFailed) {
-              context.read<CartBloc>().add(CartFetchProduct());
+            if (state is CashierFailed) {
+              context.read<CashierBloc>().add(CashierFetchProduct());
               toastMessage(
                   context: context,
                   description: state.error,
@@ -158,9 +160,9 @@ class _CashierScreenState extends State<CashierScreen> {
                   ],
                 ),
                 const SizedBox(height: 22),
-                BlocBuilder<CartBloc, CartState>(
+                BlocBuilder<CashierBloc, CashierState>(
                   builder: (context, state) {
-                    if (state is CartLoadedProduct) {
+                    if (state is CashierLoadedProduct) {
                       return GridView.builder(
                         shrinkWrap: true,
                         gridDelegate:
@@ -192,5 +194,15 @@ class _CashierScreenState extends State<CashierScreen> {
         ),
       ),
     );
+  }
+
+  void _showModalBottomSheet(BuildContext context, List<CartModel> items) {
+    if (items.isNotEmpty) {
+      showBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return CustomCartBottomSheet(items: items);
+          });
+    }
   }
 }
