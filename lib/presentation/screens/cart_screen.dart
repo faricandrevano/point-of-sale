@@ -4,6 +4,7 @@ import 'package:pos/blocs/cart_bloc/cart_bloc.dart';
 import 'package:pos/data/models/cart_model.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
+import 'package:pos/presentation/widgets/custom_filled_button.dart';
 import 'package:pos/presentation/widgets/custom_textfield_auth.dart';
 import 'package:pos/utils/currency_formatter.dart';
 
@@ -92,7 +93,107 @@ class _CartScreenState extends State<CartScreen> {
               }
               return const CircularProgressIndicator();
             },
-          )
+          ),
+          const SizedBox(height: 25),
+          Divider(color: neutral30),
+          BlocBuilder<CartBloc, CartState>(
+            builder: (context, state) {
+              if (state is CartLoaded) {
+                double total = state.cart
+                    .fold(0, (sum, item) => sum + (item.price * item.qty));
+                double tax = total * 0.1;
+                return Wrap(
+                  direction: Axis.horizontal,
+                  runSpacing: 8,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          'Subtotal',
+                          style: bodyL.copyWith(
+                            color: neutral60,
+                            fontWeight: regular,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          RupiahTextInputFormatter.format(total),
+                          style: bodyL.copyWith(
+                            color: neutral90,
+                            fontWeight: regular,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          'Tax',
+                          style: bodyL.copyWith(
+                            color: neutral60,
+                            fontWeight: regular,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          RupiahTextInputFormatter.format(tax),
+                          style: bodyL.copyWith(
+                            color: neutral90,
+                            fontWeight: regular,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              }
+              return const CircleAvatar(child: CircularProgressIndicator());
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 13),
+            child: Divider(
+              color: neutral30,
+            ),
+          ),
+          BlocBuilder<CartBloc, CartState>(
+            builder: (context, state) {
+              if (state is CartLoaded) {
+                double subtotal = state.cart
+                    .fold(0, (sum, item) => sum + (item.price * item.qty));
+                double total = (subtotal * 0.1) + subtotal;
+                return Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "Total",
+                          style: bodyXL.copyWith(
+                            color: neutral90,
+                            fontWeight: semiBold,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          RupiahTextInputFormatter.format(total),
+                          style: bodyXL.copyWith(
+                            color: neutral90,
+                            fontWeight: bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    CustomFilledButton(
+                      label: 'Place Order',
+                      onPressed: () {},
+                    )
+                  ],
+                );
+              }
+              return const CircleAvatar(child: CircularProgressIndicator());
+            },
+          ),
         ],
       ),
     );
@@ -108,9 +209,9 @@ class ItemCart extends StatefulWidget {
 }
 
 class _ItemCartState extends State<ItemCart> {
+  late int quantity = widget.cart.qty;
   @override
   Widget build(BuildContext context) {
-    int quantity = widget.cart.qty;
     return SizedBox(
       child: Column(
         children: [
