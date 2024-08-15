@@ -73,22 +73,23 @@ class HomeScreen extends StatelessWidget {
                     img: 'assets/icons/icon_dashboard.png',
                     title: 'Report',
                   ),
-                  CustomMenuDashboard(
-                    img: 'assets/icons/icon_product.png',
-                    title: 'Product',
-                    onTap: () => context.push(NamedRoute.routeProduct),
-                  ),
+                  // CustomMenuDashboard(
+                  //   img: 'assets/icons/icon_product.png',
+                  //   title: 'Product',
+                  //   onTap: () => context.push(NamedRoute.routeProduct),
+                  // ),
                   const CustomMenuDashboard(
                     img: 'assets/icons/icon_transaction.png',
                     title: 'Transcations',
                   ),
-                  const CustomMenuDashboard(
-                    img: 'assets/icons/icon_payment.png',
-                    title: 'Payment',
-                  ),
-                  const CustomMenuDashboard(
+                  // const CustomMenuDashboard(
+                  //   img: 'assets/icons/icon_payment.png',
+                  //   title: 'Payment',
+                  // ),
+                  CustomMenuDashboard(
                     img: 'assets/icons/icon_customers.png',
-                    title: 'Customer',
+                    title: 'Cart',
+                    onTap: () => context.push(NamedRoute.routeCartScreen),
                   ),
                   CustomMenuDashboard(
                     img: 'assets/icons/icon_settings.png',

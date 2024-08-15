@@ -10,6 +10,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartInitial()) {
     CollectionReference refCart =
         FirebaseFirestore.instance.collection('carts');
+    WriteBatch batch = FirebaseFirestore.instance.batch();
 
     on<CartEvent>((event, emit) async {
       if (event is CartItemAdd) {
@@ -39,10 +40,40 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               return CartModel.fromJson(dataResult);
             }).toList();
             emit(CartLoaded(cartData));
+          } else {
+            emit(CartEmpty());
           }
         } catch (e) {
           emit(const CartFailed('Gagal Load keranjang'));
         }
+      }
+    });
+    on<CartUpdateQty>((event, emit) async {
+      try {
+        await refCart.doc(event.id).update({'qty': event.qty});
+        emit(const CartSuccess('Sukses Update Keranjang'));
+      } catch (e) {
+        emit(const CartFailed('Gagal update keranjang'));
+      }
+    });
+    on<CartItemRemove>((event, emit) async {
+      try {
+        await refCart.doc(event.id).delete();
+        emit(const CartSuccess('Sukses hapus item Keranjang'));
+      } catch (e) {
+        emit(const CartFailed('Gagal hapus item keranjang'));
+      }
+    });
+    on<CartItemEmpty>((event, emit) async {
+      try {
+        QuerySnapshot snapshot = await refCart.get();
+        for (DocumentSnapshot doc in snapshot.docs) {
+          batch.delete(doc.reference);
+        }
+        await batch.commit();
+        emit(const CartSuccess('Sukses hapus item Keranjang'));
+      } catch (e) {
+        emit(const CartFailed('Gagal hapus item keranjang'));
       }
     });
   }

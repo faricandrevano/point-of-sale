@@ -41,20 +41,22 @@ class _DetailCashierScreenState extends State<DetailCashierScreen> {
         forceMaterialTransparency: true,
       ),
       body: BlocListener<CartBloc, CartState>(
-        listenWhen: (previous, current) =>
-            (current is CartSuccess && current != previous),
+        listenWhen: (previous, current) => previous != current,
         listener: (context, state) {
           if (state is CartFailed) {
             toastMessage(
                 context: context,
                 description: state.error,
                 type: ToastificationType.error);
+            context.read<CartBloc>().add(GetProductCart());
           } else if (state is CartSuccess) {
             toastMessage(
                 context: context,
                 description: state.messsage,
                 type: ToastificationType.success);
             context.push(NamedRoute.routeCashier);
+
+            context.read<CartBloc>().add(GetProductCart());
           }
         },
         child: Column(

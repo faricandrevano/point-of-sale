@@ -17,6 +17,8 @@ final class CartItemRemove extends CartEvent {
   final String id;
 }
 
+final class CartItemEmpty extends CartEvent {}
+
 final class CartUpdateQty extends CartEvent {
   final String id;
   final int qty;

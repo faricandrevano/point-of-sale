@@ -7,6 +7,7 @@ import 'package:pos/presentation/screens/cashier_screen.dart';
 import 'package:pos/presentation/screens/detail_cashier_screen.dart';
 import 'package:pos/presentation/screens/home_screen.dart';
 import 'package:pos/presentation/screens/onboarding_screen.dart';
+import 'package:pos/presentation/screens/payment_method_screen.dart';
 import 'package:pos/presentation/screens/product_data_screen.dart';
 import 'package:pos/presentation/screens/product_detail_screen.dart';
 import 'package:pos/presentation/screens/product_screen.dart';
@@ -99,6 +100,16 @@ final router = GoRouter(
       path: NamedRoute.routeCartScreen,
       name: 'Carts data',
       builder: (context, state) => const CartScreen(),
+    ),
+    GoRoute(
+      path: NamedRoute.routePaymentScreen,
+      name: 'Payment',
+      builder: (context, state) {
+        final data = state.extra as Map<String, dynamic>;
+        return PaymentMethodScreen(
+          total: data['total'],
+        );
+      },
     ),
   ],
 );
