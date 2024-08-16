@@ -25,3 +25,5 @@ Color error = const Color(0xffFF5630);
 Color success = const Color(0xff36B37E);
 Color warning = const Color(0xffFFAB00);
 Color info = const Color(0xff0065FF);
+
+Color successSurface = const Color(0xffE5F5EE);

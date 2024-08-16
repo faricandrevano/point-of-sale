@@ -1,12 +1,26 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:pos/blocs/transaction_bloc/transaction_bloc.dart';
+import 'package:pos/data/models/transaction_model.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
+import 'package:pos/router/named_route.dart';
 import 'package:pos/utils/currency_formatter.dart';
+import 'package:pos/utils/flutter_notification.dart';
 
 class PaymentMethodScreen extends StatefulWidget {
-  const PaymentMethodScreen({super.key, required this.total});
+  const PaymentMethodScreen(
+      {super.key,
+      required this.total,
+      required this.customerName,
+      required this.tax});
   final double total;
+  final double tax;
+  final String customerName;
   @override
   State<PaymentMethodScreen> createState() => _PaymentMethodScreenState();
 }
@@ -15,6 +29,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
     with TickerProviderStateMixin {
   late TabController tabController;
   int selectedOption = 0;
+  String textSelected = '';
   @override
   void initState() {
     super.initState();
@@ -24,7 +39,16 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          'Payment',
+          style: bodyXXL.copyWith(
+            fontWeight: bold,
+            color: neutral90,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: Column(
         children: [
           TabBar(
@@ -57,6 +81,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "BCA";
                               selectedOption = value!;
                             });
                           },
@@ -68,6 +93,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "BNI";
                               selectedOption = value!;
                             });
                           },
@@ -79,6 +105,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "BRI";
                               selectedOption = value!;
                             });
                           },
@@ -90,6 +117,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "CIMB";
                               selectedOption = value!;
                             });
                           },
@@ -101,6 +129,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "BTN";
                               selectedOption = value!;
                             });
                           },
@@ -112,6 +141,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "MANDIRI";
                               selectedOption = value!;
                             });
                           },
@@ -123,6 +153,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "JAGO";
                               selectedOption = value!;
                             });
                           },
@@ -144,6 +175,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "DANA";
                               selectedOption = value!;
                             });
                           },
@@ -155,6 +187,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "FLIP";
                               selectedOption = value!;
                             });
                           },
@@ -166,6 +199,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "OVO";
                               selectedOption = value!;
                             });
                           },
@@ -177,6 +211,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "PAYPAL";
                               selectedOption = value!;
                             });
                           },
@@ -188,6 +223,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
                           groupValue: selectedOption,
                           onChanged: (value) {
                             setState(() {
+                              textSelected = "SHOPEE PAY";
                               selectedOption = value!;
                             });
                           },
@@ -229,7 +265,24 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
               const SizedBox(height: 16),
               CustomFilledButton(
                 label: 'Pay Now',
-                onPressed: () {},
+                onPressed: () async {
+                  context.push(NamedRoute.routeSuccessPayment);
+                  context.read<TransactionBloc>().add(TransactionAdded(
+                      TransactionModel(
+                          customerName: widget.customerName,
+                          date: DateTime.now().toString(),
+                          id: (Random().nextInt(99) * 99).toString(),
+                          paymentMethod: textSelected,
+                          status: "SUCCESS",
+                          tax: widget.tax,
+                          total: widget.total)));
+                  await HelperNotification.flutterLocalNotificationsPlugin.show(
+                    Random().nextInt(99),
+                    'Success Checkout Order',
+                    'Proses Checkout Order',
+                    HelperNotification.notificationDetails,
+                  );
+                },
               )
             ],
           ),

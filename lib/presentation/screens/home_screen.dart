@@ -69,19 +69,20 @@ class HomeScreen extends StatelessWidget {
               ),
               delegate: SliverChildListDelegate(
                 [
-                  const CustomMenuDashboard(
+                  CustomMenuDashboard(
                     img: 'assets/icons/icon_dashboard.png',
                     title: 'Report',
+                    onTap: () => context.push(NamedRoute.routeTransaction),
                   ),
-                  // CustomMenuDashboard(
-                  //   img: 'assets/icons/icon_product.png',
-                  //   title: 'Product',
-                  //   onTap: () => context.push(NamedRoute.routeProduct),
+                  CustomMenuDashboard(
+                    img: 'assets/icons/icon_product.png',
+                    title: 'Product',
+                    onTap: () => context.push(NamedRoute.routeProduct),
+                  ),
+                  // const CustomMenuDashboard(
+                  //   img: 'assets/icons/icon_transaction.png',
+                  //   title: 'Transcations',
                   // ),
-                  const CustomMenuDashboard(
-                    img: 'assets/icons/icon_transaction.png',
-                    title: 'Transcations',
-                  ),
                   // const CustomMenuDashboard(
                   //   img: 'assets/icons/icon_payment.png',
                   //   title: 'Payment',

@@ -14,6 +14,8 @@ import 'package:pos/presentation/screens/product_screen.dart';
 import 'package:pos/presentation/screens/settings_screen.dart';
 import 'package:pos/presentation/screens/sign_in_screen.dart';
 import 'package:pos/presentation/screens/sign_up_screen.dart';
+import 'package:pos/presentation/screens/success_transaction_screen.dart';
+import 'package:pos/presentation/screens/transaction_screen.dart';
 import 'package:pos/router/named_route.dart';
 
 final router = GoRouter(
@@ -107,9 +109,21 @@ final router = GoRouter(
       builder: (context, state) {
         final data = state.extra as Map<String, dynamic>;
         return PaymentMethodScreen(
+          customerName: data['customerName'],
+          tax: data['tax'],
           total: data['total'],
         );
       },
+    ),
+    GoRoute(
+      path: NamedRoute.routeSuccessPayment,
+      name: 'success payement',
+      builder: (context, state) => const SuccessTransactionScreen(),
+    ),
+    GoRoute(
+      path: NamedRoute.routeTransaction,
+      name: 'Transaction list',
+      builder: (context, state) => const TransactionScreen(),
     ),
   ],
 );

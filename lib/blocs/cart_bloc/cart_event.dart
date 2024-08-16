@@ -26,3 +26,8 @@ final class CartUpdateQty extends CartEvent {
 }
 
 final class GetProductCart extends CartEvent {}
+
+final class PlaceOrder extends CartEvent {
+  const PlaceOrder(this.customerName);
+  final String customerName;
+}

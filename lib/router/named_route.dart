@@ -12,4 +12,6 @@ class NamedRoute {
   static const String routeDetailProductScreen = '/detail-product';
   static const String routeCartScreen = '/carts';
   static const String routePaymentScreen = '/payment';
+  static const String routeSuccessPayment = '/success-payment';
+  static const String routeTransaction = '/transaction';
 }

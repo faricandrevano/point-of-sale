@@ -242,6 +242,7 @@ class _CartScreenState extends State<CartScreen> {
                       double subtotal = state.cart.fold(
                           0, (sum, item) => sum + (item.price * item.qty));
                       double total = (subtotal * 0.1) + subtotal;
+                      double tax = total * 0.1;
                       return Column(
                         children: [
                           Row(
@@ -266,9 +267,22 @@ class _CartScreenState extends State<CartScreen> {
                           const SizedBox(height: 16),
                           CustomFilledButton(
                             label: 'Place Order',
-                            onPressed: () => context.push(
-                                NamedRoute.routePaymentScreen,
-                                extra: {'total': total}),
+                            onPressed: () {
+                              if (customerController.text.isEmpty) {
+                                toastMessage(
+                                    context: context,
+                                    description:
+                                        'Customer name tidak boleh kosong',
+                                    type: ToastificationType.error);
+                              } else {
+                                context.push(NamedRoute.routePaymentScreen,
+                                    extra: {
+                                      'total': total,
+                                      'tax': tax,
+                                      'customerName': customerController.text
+                                    });
+                              }
+                            },
                           )
                         ],
                       );
