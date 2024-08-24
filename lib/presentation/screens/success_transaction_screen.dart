@@ -3,10 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:pos/presentation/constants/colors.dart';
 import 'package:pos/presentation/constants/styles.dart';
 import 'package:pos/presentation/widgets/custom_filled_button.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
+// import 'package:pdf/pdf.dart';
+// import 'package:pdf/widgets.dart' as pw;
 import 'package:pos/router/named_route.dart';
-import 'package:printing/printing.dart';
+// import 'package:printing/printing.dart';
 
 class SuccessTransactionScreen extends StatefulWidget {
   const SuccessTransactionScreen({super.key});
@@ -17,91 +17,91 @@ class SuccessTransactionScreen extends StatefulWidget {
 }
 
 class _SuccessTransactionScreenState extends State<SuccessTransactionScreen> {
-  Future<List<Map<String, dynamic>>> _fetchItems() async {
-    // Simulasi pengambilan data dari API atau database
-    await Future.delayed(Duration(seconds: 2));
-    return [
-      {"name": "Apel", "qty": 2, "price": 5000},
-      {"name": "Roti", "qty": 1, "price": 15000},
-      {"name": "Susu", "qty": 3, "price": 7000},
-    ];
-  }
+  // Future<List<Map<String, dynamic>>> _fetchItems() async {
+  //   // Simulasi pengambilan data dari API atau database
+  //   await Future.delayed(Duration(seconds: 2));
+  //   return [
+  //     {"name": "Apel", "qty": 2, "price": 5000},
+  //     {"name": "Roti", "qty": 1, "price": 15000},
+  //     {"name": "Susu", "qty": 3, "price": 7000},
+  //   ];
+  // }
 
-  Future<void> _generatePdf(BuildContext context) async {
-    final pdf = pw.Document();
-    final items = await _fetchItems();
+  // Future<void> _generatePdf(BuildContext context) async {
+  //   final pdf = pw.Document();
+  //   final items = await _fetchItems();
 
-    pdf.addPage(
-      pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: [
-              pw.Text('Struk Belanja',
-                  style: pw.TextStyle(
-                      fontSize: 24, fontWeight: pw.FontWeight.bold)),
-              pw.SizedBox(height: 20),
-              pw.Text('Tanggal: ${DateTime.now().toString().split(' ')[0]}'),
-              pw.SizedBox(height: 20),
-              _createTable(items),
-              pw.SizedBox(height: 20),
-              pw.Text('Total Belanja: Rp${_calculateTotal(items)}',
-                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-            ],
-          );
-        },
-      ),
-    );
+  //   pdf.addPage(
+  //     pw.Page(
+  //       pageFormat: PdfPageFormat.a4,
+  //       build: (pw.Context context) {
+  //         return pw.Column(
+  //           crossAxisAlignment: pw.CrossAxisAlignment.start,
+  //           children: [
+  //             pw.Text('Struk Belanja',
+  //                 style: pw.TextStyle(
+  //                     fontSize: 24, fontWeight: pw.FontWeight.bold)),
+  //             pw.SizedBox(height: 20),
+  //             pw.Text('Tanggal: ${DateTime.now().toString().split(' ')[0]}'),
+  //             pw.SizedBox(height: 20),
+  //             _createTable(items),
+  //             pw.SizedBox(height: 20),
+  //             pw.Text('Total Belanja: Rp${_calculateTotal(items)}',
+  //                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+  //           ],
+  //         );
+  //       },
+  //     ),
+  //   );
 
-    await Printing.layoutPdf(
-      onLayout: (PdfPageFormat format) async => pdf.save(),
-    );
-  }
+  //   await Printing.layoutPdf(
+  //     onLayout: (PdfPageFormat format) async => pdf.save(),
+  //   );
+  // }
 
-  pw.Widget _createTable(List<Map<String, dynamic>> items) {
-    return pw.Table(
-      border: pw.TableBorder.all(),
-      children: [
-        pw.TableRow(
-          children: [
-            pw.Padding(
-              padding: pw.EdgeInsets.all(5),
-              child: pw.Text('Produk',
-                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-            ),
-            pw.Padding(
-              padding: pw.EdgeInsets.all(5),
-              child: pw.Text('Jumlah',
-                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-            ),
-            pw.Padding(
-              padding: pw.EdgeInsets.all(5),
-              child: pw.Text('Harga',
-                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-            ),
-          ],
-        ),
-        ...items.map((item) => pw.TableRow(
-              children: [
-                pw.Padding(
-                    padding: pw.EdgeInsets.all(5),
-                    child: pw.Text(item['name'])),
-                pw.Padding(
-                    padding: pw.EdgeInsets.all(5),
-                    child: pw.Text(item['qty'].toString())),
-                pw.Padding(
-                    padding: pw.EdgeInsets.all(5),
-                    child: pw.Text('Rp${item['price']}')),
-              ],
-            )),
-      ],
-    );
-  }
+  // pw.Widget _createTable(List<Map<String, dynamic>> items) {
+  //   return pw.Table(
+  //     border: pw.TableBorder.all(),
+  //     children: [
+  //       pw.TableRow(
+  //         children: [
+  //           pw.Padding(
+  //             padding: pw.EdgeInsets.all(5),
+  //             child: pw.Text('Produk',
+  //                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+  //           ),
+  //           pw.Padding(
+  //             padding: pw.EdgeInsets.all(5),
+  //             child: pw.Text('Jumlah',
+  //                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+  //           ),
+  //           pw.Padding(
+  //             padding: pw.EdgeInsets.all(5),
+  //             child: pw.Text('Harga',
+  //                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+  //           ),
+  //         ],
+  //       ),
+  //       ...items.map((item) => pw.TableRow(
+  //             children: [
+  //               pw.Padding(
+  //                   padding: pw.EdgeInsets.all(5),
+  //                   child: pw.Text(item['name'])),
+  //               pw.Padding(
+  //                   padding: pw.EdgeInsets.all(5),
+  //                   child: pw.Text(item['qty'].toString())),
+  //               pw.Padding(
+  //                   padding: pw.EdgeInsets.all(5),
+  //                   child: pw.Text('Rp${item['price']}')),
+  //             ],
+  //           )),
+  //     ],
+  //   );
+  // }
 
-  int _calculateTotal(List<Map<String, dynamic>> items) {
-    return items.fold(0, (sum, item) => (item['qty'] * item['price']));
-  }
+  // int _calculateTotal(List<Map<String, dynamic>> items) {
+  //   return items.fold(0, (sum, item) => (item['qty'] * item['price']));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -271,7 +271,7 @@ class _SuccessTransactionScreenState extends State<SuccessTransactionScreen> {
           const SizedBox(height: 32),
           CustomFilledButton(
             onPressed: () {
-              _generatePdf(context);
+              // _generatePdf(context);
             },
             label: 'Print Receipt',
             alignment: IconAlignment.start,
