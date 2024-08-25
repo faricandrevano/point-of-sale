@@ -35,7 +35,9 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: neutral10,
       appBar: AppBar(
+        forceMaterialTransparency: true,
         leading: GestureDetector(
           onTap: () => context.push(NamedRoute.routeHome),
           child: const Icon(Icons.arrow_back),

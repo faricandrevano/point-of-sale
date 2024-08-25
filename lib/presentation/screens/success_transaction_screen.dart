@@ -106,6 +106,7 @@ class _SuccessTransactionScreenState extends State<SuccessTransactionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: neutral10,
       appBar: AppBar(
         forceMaterialTransparency: true,
         automaticallyImplyLeading: false,
@@ -130,7 +131,7 @@ class _SuccessTransactionScreenState extends State<SuccessTransactionScreen> {
               ),
               const SizedBox(height: 12),
               Text(
-                "Rp 30000",
+                "Rp 191.400",
                 style: headingM.copyWith(
                   color: neutral90,
                   fontWeight: bold,
@@ -151,7 +152,7 @@ class _SuccessTransactionScreenState extends State<SuccessTransactionScreen> {
                   style: bodyL.copyWith(color: neutral90, fontWeight: regular),
                 ),
                 trailing: Text(
-                  "QRIS",
+                  "BCA",
                   style: bodyL.copyWith(color: neutral90, fontWeight: semiBold),
                 ),
               ),
@@ -202,13 +203,13 @@ class _SuccessTransactionScreenState extends State<SuccessTransactionScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "T-Men's UA Storm Armour Down 2.0 Sweater",
+                          "women's Turtleneck Sweater",
                           style: bodyL.copyWith(
                               color: neutral90, fontWeight: regular),
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          "1 X 1,000",
+                          "3 X 20.000",
                           style: bodyL.copyWith(
                               color: neutral90, fontWeight: regular),
                         ),
@@ -216,7 +217,37 @@ class _SuccessTransactionScreenState extends State<SuccessTransactionScreen> {
                     ),
                   ),
                   Text(
-                    "Rp 200000",
+                    "Rp 60.000",
+                    style:
+                        bodyL.copyWith(color: neutral100, fontWeight: semiBold),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 260,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "windproff handbell oversized long coat",
+                          style: bodyL.copyWith(
+                              color: neutral90, fontWeight: regular),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          "2 X 57.000",
+                          style: bodyL.copyWith(
+                              color: neutral90, fontWeight: regular),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    "Rp 114.000",
                     style:
                         bodyL.copyWith(color: neutral100, fontWeight: semiBold),
                   ),
@@ -233,7 +264,7 @@ class _SuccessTransactionScreenState extends State<SuccessTransactionScreen> {
                   style: bodyL.copyWith(color: neutral90, fontWeight: regular),
                 ),
                 trailing: Text(
-                  "Rp 300000",
+                  "Rp 174.000",
                   style:
                       bodyL.copyWith(color: neutral100, fontWeight: semiBold),
                 ),
@@ -245,7 +276,7 @@ class _SuccessTransactionScreenState extends State<SuccessTransactionScreen> {
                   style: bodyL.copyWith(color: neutral90, fontWeight: regular),
                 ),
                 trailing: Text(
-                  "Rp 10000",
+                  "Rp 17.400",
                   style:
                       bodyL.copyWith(color: neutral100, fontWeight: semiBold),
                 ),
@@ -261,7 +292,7 @@ class _SuccessTransactionScreenState extends State<SuccessTransactionScreen> {
                   style: bodyL.copyWith(color: neutral90, fontWeight: regular),
                 ),
                 trailing: Text(
-                  "Rp 10000",
+                  "Rp 191.400",
                   style:
                       bodyL.copyWith(color: neutral100, fontWeight: semiBold),
                 ),

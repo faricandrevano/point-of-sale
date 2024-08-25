@@ -9,9 +9,9 @@ import 'package:pos/presentation/widgets/custom_filled_button.dart';
 import 'package:pos/presentation/widgets/custom_search_bar.dart';
 import 'package:pos/router/named_route.dart';
 import 'package:pos/utils/currency_formatter.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
+// import 'package:pdf/pdf.dart';
+// import 'package:pdf/widgets.dart' as pw;
+// import 'package:printing/printing.dart';
 
 class TransactionScreen extends StatefulWidget {
   const TransactionScreen({super.key});
@@ -99,7 +99,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                       height: 40,
                       alignment: IconAlignment.start,
                       onPressed: () {
-                        _generatePdf(context);
+                        // _generatePdf(context);
                       },
                       icon: Icon(
                         Icons.print,
@@ -178,89 +178,89 @@ class _TransactionScreenState extends State<TransactionScreen> {
   }
 }
 
-Future<void> _generatePdf(BuildContext context) async {
-  final pdf = pw.Document();
+// Future<void> _generatePdf(BuildContext context) async {
+//   final pdf = pw.Document();
 
-  // Tambahkan halaman ke dokumen PDF
-  pdf.addPage(
-    pw.Page(
-      pageFormat: PdfPageFormat.a4,
-      build: (pw.Context context) {
-        return pw.Column(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
-          children: [
-            pw.Text('Sales Report',
-                style:
-                    pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold)),
-            pw.SizedBox(height: 20),
-            pw.Text('Date: ${DateTime.now().toString().split(' ')[0]}'),
-            pw.SizedBox(height: 20),
-            _createTable(),
-            pw.SizedBox(height: 20),
-            pw.Text('Total Sales: \$1,500',
-                style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          ],
-        );
-      },
-    ),
-  );
+//   // Tambahkan halaman ke dokumen PDF
+//   pdf.addPage(
+//     pw.Page(
+//       pageFormat: PdfPageFormat.a4,
+//       build: (pw.Context context) {
+//         return pw.Column(
+//           crossAxisAlignment: pw.CrossAxisAlignment.start,
+//           children: [
+//             pw.Text('Sales Report',
+//                 style:
+//                     pw.TextStyle(fontSize: 24, fontWeight: pw.FontWeight.bold)),
+//             pw.SizedBox(height: 20),
+//             pw.Text('Date: ${DateTime.now().toString().split(' ')[0]}'),
+//             pw.SizedBox(height: 20),
+//             _createTable(),
+//             pw.SizedBox(height: 20),
+//             pw.Text('Total Sales: \$1,500',
+//                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+//           ],
+//         );
+//       },
+//     ),
+//   );
 
-  // Tampilkan preview PDF
-  await Printing.layoutPdf(
-    onLayout: (PdfPageFormat format) async => pdf.save(),
-  );
-}
+//   // Tampilkan preview PDF
+//   await Printing.layoutPdf(
+//     onLayout: (PdfPageFormat format) async => pdf.save(),
+//   );
+// }
 
-pw.Widget _createTable() {
-  return pw.Table(
-    border: pw.TableBorder.all(),
-    children: [
-      pw.TableRow(
-        children: [
-          pw.Padding(
-            padding: pw.EdgeInsets.all(5),
-            child: pw.Text('Product',
-                style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          ),
-          pw.Padding(
-            padding: pw.EdgeInsets.all(5),
-            child: pw.Text('Quantity',
-                style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          ),
-          pw.Padding(
-            padding: pw.EdgeInsets.all(5),
-            child: pw.Text('Price',
-                style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-          ),
-        ],
-      ),
-      pw.TableRow(
-        children: [
-          pw.Padding(
-              padding: pw.EdgeInsets.all(5), child: pw.Text('Product A')),
-          pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('5')),
-          pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('\$100')),
-        ],
-      ),
-      pw.TableRow(
-        children: [
-          pw.Padding(
-              padding: pw.EdgeInsets.all(5), child: pw.Text('Product B')),
-          pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('3')),
-          pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('\$200')),
-        ],
-      ),
-      pw.TableRow(
-        children: [
-          pw.Padding(
-              padding: pw.EdgeInsets.all(5), child: pw.Text('Product C')),
-          pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('2')),
-          pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('\$300')),
-        ],
-      ),
-    ],
-  );
-}
+// pw.Widget _createTable() {
+//   return pw.Table(
+//     border: pw.TableBorder.all(),
+//     children: [
+//       pw.TableRow(
+//         children: [
+//           pw.Padding(
+//             padding: pw.EdgeInsets.all(5),
+//             child: pw.Text('Product',
+//                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+//           ),
+//           pw.Padding(
+//             padding: pw.EdgeInsets.all(5),
+//             child: pw.Text('Quantity',
+//                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+//           ),
+//           pw.Padding(
+//             padding: pw.EdgeInsets.all(5),
+//             child: pw.Text('Price',
+//                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+//           ),
+//         ],
+//       ),
+//       pw.TableRow(
+//         children: [
+//           pw.Padding(
+//               padding: pw.EdgeInsets.all(5), child: pw.Text('Product A')),
+//           pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('5')),
+//           pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('\$100')),
+//         ],
+//       ),
+//       pw.TableRow(
+//         children: [
+//           pw.Padding(
+//               padding: pw.EdgeInsets.all(5), child: pw.Text('Product B')),
+//           pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('3')),
+//           pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('\$200')),
+//         ],
+//       ),
+//       pw.TableRow(
+//         children: [
+//           pw.Padding(
+//               padding: pw.EdgeInsets.all(5), child: pw.Text('Product C')),
+//           pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('2')),
+//           pw.Padding(padding: pw.EdgeInsets.all(5), child: pw.Text('\$300')),
+//         ],
+//       ),
+//     ],
+//   );
+// }
 
 class CustoTransactionList extends StatefulWidget {
   const CustoTransactionList({

@@ -14,7 +14,9 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: neutral10,
       appBar: AppBar(
+        forceMaterialTransparency: true,
         title: Text(
           'Profile',
           style: bodyXXL.copyWith(
@@ -53,7 +55,7 @@ class SettingsScreen extends StatelessWidget {
                       const CircleAvatar(radius: 60),
                       const SizedBox(height: 16),
                       Text(
-                        'Lynette Nikolaus',
+                        'Faric Andrevano',
                         style: bodyL.copyWith(
                           fontWeight: bold,
                           color: neutral90,

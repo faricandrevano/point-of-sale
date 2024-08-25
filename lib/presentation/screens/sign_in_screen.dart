@@ -25,7 +25,10 @@ class _SignInScreenState extends State<SignInScreen> {
     TextEditingController controllerEmail = TextEditingController();
     TextEditingController controllerPassword = TextEditingController();
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: neutral10,
+      appBar: AppBar(
+        forceMaterialTransparency: true,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: BlocListener<AuthBloc, AuthState>(

@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: neutral10,
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -26,26 +27,139 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 24),
                   Row(
                     children: [
-                      Column(
-                        children: [
-                          Text(
-                            'This month transaction',
-                            style: bodyM.copyWith(
-                              color: neutral50,
-                              fontWeight: regular,
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Faric Andrevano",
+                                  style: bodyXL.copyWith(
+                                    fontWeight: bold,
+                                    color: neutral10,
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  "Bussiness owner",
+                                  style: bodyL.copyWith(
+                                    color: neutral50,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            "\$3599.00",
-                            style: headingM.copyWith(
-                              fontWeight: bold,
+                            Icon(
+                              Icons.notifications_on_outlined,
                               color: neutral10,
-                            ),
+                              size: 28,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 48),
+                  Row(
+                    children: [
+                      Container(
+                        width: 96,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: neutral10,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Transactions",
+                          style: bodyM.copyWith(
+                            fontWeight: semiBold,
+                            color: neutral90,
                           ),
-                        ],
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Container(
+                        width: 114,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(
+                            color: neutral50,
+                            strokeAlign: BorderSide.strokeAlignInside,
+                          ),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Product Sales",
+                          style: bodyM.copyWith(
+                            fontWeight: semiBold,
+                            color: neutral50,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'This month transaction',
+                              style: bodyM.copyWith(
+                                color: neutral50,
+                                fontWeight: regular,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Rp 190.000",
+                                  style: headingM.copyWith(
+                                    fontWeight: bold,
+                                    color: neutral10,
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 3,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: info,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.arrow_upward,
+                                        color: neutral10,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        "20%",
+                                        style: bodyM.copyWith(
+                                          fontWeight: medium,
+                                          color: neutral10,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       // SizedBox()
                     ],
@@ -79,14 +193,14 @@ class HomeScreen extends StatelessWidget {
                     title: 'Product',
                     onTap: () => context.push(NamedRoute.routeProduct),
                   ),
-                  // const CustomMenuDashboard(
-                  //   img: 'assets/icons/icon_transaction.png',
-                  //   title: 'Transcations',
-                  // ),
-                  // const CustomMenuDashboard(
-                  //   img: 'assets/icons/icon_payment.png',
-                  //   title: 'Payment',
-                  // ),
+                  const CustomMenuDashboard(
+                    img: 'assets/icons/icon_transaction.png',
+                    title: 'Transcations',
+                  ),
+                  const CustomMenuDashboard(
+                    img: 'assets/icons/icon_payment.png',
+                    title: 'Payment',
+                  ),
                   CustomMenuDashboard(
                     img: 'assets/icons/icon_customers.png',
                     title: 'Cart',

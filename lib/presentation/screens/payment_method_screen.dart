@@ -39,7 +39,9 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: neutral10,
       appBar: AppBar(
+        forceMaterialTransparency: true,
         title: Text(
           'Payment',
           style: bodyXXL.copyWith(
@@ -53,7 +55,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen>
         children: [
           TabBar(
             controller: tabController,
-            tabs: [
+            tabs: const [
               Tab(
                 text: 'BANK TRANSFER',
               ),

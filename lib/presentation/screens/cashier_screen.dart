@@ -33,6 +33,7 @@ class _CashierScreenState extends State<CashierScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: neutral10,
       appBar: AppBar(
         leading: GestureDetector(
           onTap: () {
@@ -203,6 +204,45 @@ class _CashierScreenState extends State<CashierScreen> {
                             ),
                           );
                         },
+                      );
+                    } else if (state is CashierEmptyProduct) {
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 16,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/img_product_empty.png',
+                              width: 300,
+                            ),
+                            const SizedBox(height: 130),
+                            Text(
+                              'You don’t have any product yet',
+                              style: headingS.copyWith(
+                                color: neutral90,
+                                fontWeight: bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              'You have successfully registered. Click button bellow to continue using the apps',
+                              style: bodyL.copyWith(
+                                color: neutral60,
+                                fontWeight: regular,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 48),
+                            CustomFilledButton(
+                              label: 'Continue',
+                              onPressed: () {},
+                            )
+                          ],
+                        ),
                       );
                     }
                     return const CircularProgressIndicator();
